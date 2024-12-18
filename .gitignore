@@ -1,4 +1,4 @@
 *.txt
 .idea/
 .venv/
-test.py
+.test.py
