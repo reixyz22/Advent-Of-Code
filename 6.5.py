@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
+import copy
+
 
 def read_input_file(filename):
     space = []
+    # Read the input file 'day4.txt' and store each line as a list of tiles
     with open(filename, 'r') as file:
         for line in file:
             space.append(list(line.strip()))  # Strip newlines and convert each line to a list
@@ -19,60 +22,45 @@ def finder(space):
 
 
 def move(start, space):
-    count = 1
     direction = "up"
-    while True:
+
+    for _ in range(20000):
         if direction == "up":
             if 0 <= start[0] - 1 < len(space):  # Check bounds for "up"
                 if space[start[0] - 1][start[1]] == '#':
                     direction = "right"
                 else:
-                    if space[start[0] - 1][start[1]] != 'X':
-                        space[start[0] - 1][start[1]] = 'X'
-                        count += 1
                     start = (start[0] - 1, start[1])  # Move up
             else:
-                print(count)
-                quit()
+                return False
 
         elif direction == "down":
             if 0 <= start[0] + 1 < len(space):  # Check bounds for "down"
                 if space[start[0] + 1][start[1]] == '#':
                     direction = "left"
                 else:
-                    if space[start[0] + 1][start[1]] != 'X':
-                        space[start[0] + 1][start[1]] = 'X'
-                        count += 1
                     start = (start[0] + 1, start[1])  # Move down
             else:
-                print(count)
-                quit()
+                return False
 
         elif direction == "right":
             if 0 <= start[1] + 1 < len(space[0]):  # Check bounds for "right"
                 if space[start[0]][start[1] + 1] == '#':
                     direction = "down"
                 else:
-                    if space[start[0]][start[1] + 1] != 'X':
-                        space[start[0]][start[1] + 1] = 'X'
-                        count += 1
                     start = (start[0], start[1] + 1)  # Move right
             else:
-                print(count)
-                quit()
+                return False
 
         elif direction == "left":
             if 0 <= start[1] - 1 < len(space[0]):  # Check bounds for "left"
                 if space[start[0]][start[1] - 1] == '#':
                     direction = "up"
                 else:
-                    if space[start[0]][start[1] - 1] != 'X':
-                        space[start[0]][start[1] - 1] = 'X'
-                        count += 1
                     start = (start[0], start[1] - 1)  # Move left
             else:
-                print(count)
-                quit()
+                return False
+    return True  # infinite loop (more than 20k steps)
 
 
 def main():
@@ -80,8 +68,16 @@ def main():
     space = read_input_file('day6.txt')
 
     player_index = finder(space)
-    space[player_index[0]][player_index[1]] = "X"
-    move(player_index, space)
+
+    loop_count = 0
+    for i in range(0, len(space)):
+        for j in range(0, len(space[i])):
+            sub_space = copy.deepcopy(space)
+            if sub_space[i][j] != '#':
+                sub_space[i][j] = '#'
+                if move(player_index, sub_space):
+                    loop_count += 1
+    print(loop_count)
 
 
 if __name__ == '__main__':
