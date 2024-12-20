@@ -35,8 +35,11 @@ def solve(test_case, symbols):
         if symbol == '*':
             test_case[1] = test_case[1] * test_case[2]
             del test_case[2]
-        else:
+        elif symbol == '+':
             test_case[1] = test_case[1] + test_case[2]
+            del test_case[2]
+        elif symbol == '|':
+            test_case[1] = int(str(test_case[1]) + str(test_case[2]))
             del test_case[2]
         if test_case[1] > test_case[0]:
             break
@@ -45,7 +48,7 @@ def solve(test_case, symbols):
 
 def main():
     file = read_file('day7.txt')
-    symbols = ['*', '+']
+    symbols = ['*', '+', '|']
 
     unique_lengths = set()
     for line in file:
