@@ -1,11 +1,8 @@
 #!/usr/bin/env python3
 
-space = []  # Initialize an empty list to store the grid
-match = 0  # Initialize the match counter
-
-
 def main():
-    global match  # Access the global match variable
+    space = []  # Initialize an empty list to store the grid
+    match = 0  # Initialize the match counter
 
     # Read the input file 'day4.txt' and store each line as a list of characters
     with open('day4.txt', 'r') as file:
