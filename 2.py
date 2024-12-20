@@ -46,6 +46,7 @@ def main():
             # Check if the sequence is safe
             if is_safe(numbers):
                 safe += 1
+                # part 2 V
             else:
                 # Check if removing one number makes the sequence safe
                 for i in range(len(numbers)):
