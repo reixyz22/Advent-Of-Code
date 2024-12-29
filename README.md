@@ -38,14 +38,6 @@ python solution.py
 
 Make sure the `input.txt` file is present in the same directory as the script.
 
-## Highlights
-
-- Efficient implementations of common algorithms such as:
-  - Breadth-First Search (BFS)
-  - Depth-First Search (DFS)
-  - Dynamic Programming (DP)
-  - String Manipulations
-- Usage of Python's powerful libraries such as `collections`, `itertools`, and `numpy` for optimized solutions.
 
 ## Contributions
 
